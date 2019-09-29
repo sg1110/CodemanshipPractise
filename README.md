@@ -1,2 +1,2 @@
 # eslint_test_template
-Templare with eslint and test set up.
+Template with eslint and test set up.
