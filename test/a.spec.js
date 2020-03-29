@@ -1,4 +1,4 @@
-const a = require("../javascript/a");
+const a = require("../src/a");
 const expect = require("chai").expect;
 
 describe("Given....", function() {
