@@ -1,17 +1,9 @@
 const { it } = require("mocha");
-
 const Rover = require("../src/a").Rover;
 const expect = require("chai").expect;
 
-// describe("Given....", function() {
-//   [{ it: "a", expect: "a" }].forEach(run =>
-//     it(`should ... ${run.it} to.... ${run.expect}`, () => {
-//       expect(a(run.it)).to.equal(run.expect);
-//     })
-//   );
-// });
-
 let myRover;
+var currentPosition = [0, 0];
 beforeEach(() => (myRover = new Rover([0, 0], "N")));
 
 describe("rover initial position", () => {
@@ -19,40 +11,37 @@ describe("rover initial position", () => {
     expect(myRover.position).to.deep.equal([0, 0]);
   });
 
-  it("new rover has position of [0,0] by default", () => {
-    expect(myRover.facing).to.equal("N");
-  });
-
-  it("new rover is facing north by default", () => {
+  it("new rover has position of N by default", () => {
     expect(myRover.facing).to.equal("N");
   });
 });
 
-describe("forward and backward commands", () => {
-  it("should move the rover forward by one position", () => {
-    myRover.move(["f"]);
-    expect(myRover.position).to.deep.equal([0, 1]);
-  });
-
-  it("should move the rover forward by two position", () => {
-    myRover.move(["f", "f"]);
-    expect(myRover.position).to.deep.equal([0, 2]);
-  });
-
-  it("should move the rover backwards by one position", () => {
-    myRover.move(["f", "b"]);
-    expect(myRover.position).to.deep.equal([0, 0]);
-  });
+describe("Movement tests", function() {
+  [
+    { input: ["f"], expect: [0, 1] },
+    { input: ["f", "f"], expect: [0, 2] },
+    { input: ["f", "b"], expect: [0, 0] }
+  ].forEach(run =>
+    describe(`GIVEN a movement command ${run.input} at current position ${currentPosition}`, () => {
+      it(`SHOULD move the rover by ${run.input.length} and its position is ${run.expect}`, () => {
+        myRover.followCommand(run.input);
+        expect(myRover.position).to.deep.equal(run.expect);
+      });
+    })
+  );
 });
 
-describe("left and right commands", () => {
-  it("should move the rover to the left by one position", () => {
-    myRover.move(["l"]);
-    expect(myRover.position).to.deep.equal([-1, 0]);
-  });
-  it("should move the rover to the right by one position", () => {
-    myRover.move(["r"]);
-
-    expect(myRover.position).to.deep.equal([1, 0]);
-  });
+describe("Rotation Tests", function() {
+  [
+    { input: ["r"], expect: "E" },
+    { input: ["l"], expect: "W" },
+    { input: ["l", "l"], expect: "S" }
+  ].forEach(run =>
+    describe(`GIVEN a rotation command ${run.input}`, () => {
+      it(`SHOULD rotate and it's facing position should be ${run.expect}`, () => {
+        myRover.followCommand(run.input);
+        expect(myRover.facing).to.deep.equal(run.expect);
+      });
+    })
+  );
 });

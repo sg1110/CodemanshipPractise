@@ -4,21 +4,33 @@ class Rover {
     this.facing = facing;
   }
 
-  move(commands) {
+  followCommand(commands) {
     commands.forEach(command => {
-      if (command === "f") {
-        this.position[1]++;
-      }
-      if (command === "b") {
-        this.position[1]--;
-      }
-      if (command === "l") {
-        this.position[0]--;
-      }
-      if (command === "r") {
-        this.position[0]++;
-      }
+      this.move(command);
+      this.rotate(command);
     });
+  }
+
+  rotate(command) {
+    if (command === "l") {
+      if (this.facing === "W") {
+        this.facing = "S";
+      } else {
+        this.facing = "W";
+      }
+    }
+    if (command === "r") {
+      this.facing = "E";
+    }
+  }
+
+  move(command) {
+    if (command === "f") {
+      this.position[1]++;
+    }
+    if (command === "b") {
+      this.position[1]--;
+    }
   }
 }
 
