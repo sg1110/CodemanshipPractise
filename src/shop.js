@@ -3,11 +3,11 @@ class Cd {
     this.title = title;
     this.quantity = quantity;
   }
-  buyCd() {
-    if (this.quantity > 0) {
+  buyCd(order) {
+    if (order.quantity <= this.quantity) {
       return "success";
     }
-    if (this.quantity <= 0) {
+    if (order.quantity > this.quantity) {
       return "failure";
     }
   }

@@ -10,7 +10,7 @@ describe("Customer interactions", () => {
     expect(cd.buyCd(order)).to.equal("success");
   });
 
-  it("stock should go down when a cd is purchased", () => {});
+  //it("stock should go down when a cd is purchased", () => {});
 
   it("should not be able to buy a cd when it's not in stock", () => {
     const cd = new Cd("some cd", 0);
