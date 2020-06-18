@@ -28,4 +28,9 @@ describe("Customer interactions", () => {
     cd.addRating(10);
     expect(cd.rating).to.equal(10);
   });
+
+  it.only("should return eligible for discount if rated in top 100", () => {
+    const cd = new Cd("some cd", 0, () => 1);
+    expect(cd.isTopRated()).to.be.true;
+  });
 });
