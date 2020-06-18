@@ -2,14 +2,17 @@ class Cd {
   constructor(title, quantity) {
     this.title = title;
     this.quantity = quantity;
+    this.rating;
   }
   buyCd(order) {
-    if (order.quantity <= this.quantity) {
+    if (order.cd.title === this.title && order.quantity <= this.quantity) {
+      this.quantity -= order.quantity;
       return "success";
     }
-    if (order.quantity > this.quantity) {
-      return "failure";
-    }
+    return "failure";
+  }
+  addRating(ratingScore) {
+    this.rating = ratingScore;
   }
 }
 
