@@ -32,3 +32,4 @@ module.exports = {
   Cd,
   Order
 };
+// wouldnt have to import external rating and overwrite it in a global scope
